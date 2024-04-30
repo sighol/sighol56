@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NAV] = LAYOUT( // left up
         KC_VOLD, KC_VOLU, KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,      _______,    _______,    _______,  _______, _______, _______,
-        KC_MUTE, _______, _______,  SH_LCBRK, SH_RCBRK,  KC_EQL,      KC_PGUP, C(KC_LEFT),    KC_UP, C(KC_RGHT), _______, _______,
-        _______,  KC_GRV, _______,   SH_LPAR,  SH_RPAR, KC_RBRC,      KC_PGDN,    KC_LEFT,    KC_DOWN,  KC_RGHT, _______, _______,
-        _______, KC_NUBS, _______,   SH_LBRK,  SH_RBRK, KC_BSLS,      _______,    KC_HOME,     KC_END,  _______,  _______, _______,
+        KC_MUTE, XXXXXXX, XXXXXXX,  SH_LCBRK, SH_RCBRK,  KC_EQL,      KC_PGUP, C(KC_LEFT),    KC_UP, C(KC_RGHT), _______, _______,
+        _______,  KC_GRV, XXXXXXX,   SH_LPAR,  SH_RPAR, KC_RBRC,      KC_PGDN,    KC_LEFT,    KC_DOWN,  KC_RGHT, _______, KC_BSLS,
+        _______, KC_NUBS, XXXXXXX,   SH_LBRK,  SH_RBRK, KC_BSLS,      _______,    KC_HOME,     KC_END,  _______, _______, _______,
                           _______,   _______,  _______, _______,      _______,  _______, MO(SETTINGS),  _______
     ),
 
