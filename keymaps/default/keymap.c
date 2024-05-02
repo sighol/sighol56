@@ -35,6 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
     [BASE] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,      KC_5,        KC_6,    KC_7,       KC_8,    KC_9,    KC_0,  KC_MINUS,
+
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,        KC_Y,    KC_U,       KC_I,    KC_O,    KC_P,   KC_LBRC,
         KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        KC_H,    KC_J,       KC_K,    KC_L, KC_SCLN,   KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,        KC_N,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,   KC_RSFT,
@@ -42,6 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [COLEMAK] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,     KC_3,    KC_4,      KC_5,       KC_6,      KC_7,     KC_8,    KC_9,    KC_0, KC_MINUS,
+
         KC_TAB,  KC_Q,    KC_W,     KC_F,    KC_P,      KC_G,       KC_J,      KC_L,     KC_U,    KC_Y, KC_SCLN,  KC_LBRC,
         KC_BSPC, KC_A,    KC_R,     KC_S,    KC_T,      KC_D,       KC_H,      KC_N,     KC_E,    KC_I,    KC_O,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,     KC_C,    KC_V,      KC_B,       KC_K,      KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
@@ -50,6 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NAV] = LAYOUT( // left up
         KC_VOLD, KC_VOLU, KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,      _______,    _______,    _______,  _______, _______, _______,
+
         KC_MUTE, XXXXXXX, XXXXXXX,  SH_LCBRK, SH_RCBRK,  KC_EQL,      KC_PGUP, C(KC_LEFT),    KC_UP, C(KC_RGHT), _______, _______,
         _______,  KC_GRV, XXXXXXX,   SH_LPAR,  SH_RPAR, KC_RBRC,      KC_PGDN,    KC_LEFT,    KC_DOWN,  KC_RGHT, S(KC_2), KC_BSLS,
         _______, KC_NUBS, XXXXXXX,   SH_LBRK,  SH_RBRK, KC_BSLS,      _______,    KC_HOME,     KC_END,  _______, _______, _______,
@@ -58,6 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NUMB] = LAYOUT( // Hold down right side
         _______, _______, _______, _______,      _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
+
         _______, _______,    KC_7,    KC_8,         KC_9,  _______,      _______,    KC_F7,    KC_F8,    KC_F9,   KC_F10,  KC_DEL,
         _______,    KC_0,    KC_4,    KC_5,         KC_6,     KC_0,      _______,    KC_F4,    KC_F5,    KC_F6,   KC_F11, KC_CAPS,
         _______, _______,    KC_1,    KC_2,         KC_3,  _______,      _______,    KC_F1,    KC_F2,    KC_F3,   KC_F12, _______,
@@ -65,15 +69,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [SETTINGS] = LAYOUT(
-        QK_BOOT, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
-        _______, _______,    _______,  _______,  _______,  DF(BASE),     _______,  _______,  _______,  _______,  _______, _______,
-        _______, _______,    _______,  _______,  _______,  DF(COLEMAK),  _______,  _______,  _______,  _______,  _______, _______,
-        _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
-                             _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______
+        QK_BOOT, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(BASE),     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(COLEMAK),  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+                             XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,      XXXXXXX,  XXXXXXX,  _______,  XXXXXXX
     ),
 
     [TEMP] = LAYOUT( // NOT IN USE
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
+
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
