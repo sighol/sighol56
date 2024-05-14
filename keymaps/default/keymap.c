@@ -8,7 +8,8 @@
 #define NUMB 2
 #define NAV 3
 #define SETTINGS 4
-#define TEMP 5
+#define MOUSE 5
+#define TEMP 6
 
 #define SH_LPAR S(KC_8)
 #define SH_RPAR S(KC_9)
@@ -51,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [NAV] = LAYOUT( // left up
-        KC_VOLD, KC_VOLU, KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,      XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_VOLD, KC_VOLU,  KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,      XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
 
-        KC_MUTE, XXXXXXX, XXXXXXX,  SH_LCBRK, SH_RCBRK,  KC_EQL,      KC_PGUP, C(KC_LEFT),    KC_UP, C(KC_RGHT), XXXXXXX, XXXXXXX,
-        _______,  KC_GRV, XXXXXXX,   SH_LPAR,  SH_RPAR, KC_RBRC,      KC_PGDN,    KC_LEFT,    KC_DOWN,  KC_RGHT, S(KC_2), KC_BSLS,
-        _______, KC_NUBS, S(KC_NUBS),SH_LBRK,  SH_RBRK, KC_BSLS,      XXXXXXX,    KC_HOME,     KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_MUTE, XXXXXXX,  XXXXXXX,  SH_LCBRK, SH_RCBRK,   KC_EQL,      KC_PGUP, C(KC_LEFT),   KC_UP, C(KC_RGHT), XXXXXXX, XXXXXXX,
+        _______,  KC_GRV,  XXXXXXX,   SH_LPAR,  SH_RPAR,  KC_RBRC,      KC_PGDN,    KC_LEFT, KC_DOWN,  KC_RGHT, S(KC_2), KC_BSLS,
+        _______, KC_NUBS, S(KC_NUBS), SH_LBRK,  SH_RBRK,MO(MOUSE),      XXXXXXX,    KC_HOME,  KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,
                           _______,   _______,  _______, _______,      _______,  _______, MO(SETTINGS),  _______
     ),
 
@@ -75,6 +76,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(COLEMAK),  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
                              XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,      XXXXXXX,  XXXXXXX,  _______,  XXXXXXX
+    ),
+
+    [MOUSE] = LAYOUT(
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_U,  XXXXXXX,  KC_MS_U,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_D,  KC_MS_L,  KC_MS_D,  KC_MS_R,  XXXXXXX, XXXXXXX,
+        _______, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+                             _______,  _______,  _______,  XXXXXXX,     KC_BTN1,  KC_BTN2,  _______,  XXXXXXX
     ),
 
     [TEMP] = LAYOUT( // NOT IN USE
