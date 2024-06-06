@@ -3,13 +3,15 @@
 
 #include QMK_KEYBOARD_H
 
-#define BASE 0
-#define COLEMAK 1
-#define NUMB 2
-#define NAV 3
-#define SETTINGS 4
-#define MOUSE 5
-#define TEMP 6
+enum Layers {
+    BASE,
+    COLEMAK,
+    LEFT,
+    RGHT,
+    SETTINGS,
+    MOUSE,
+    TEMP,
+};
 
 #define SH_LPAR S(KC_8)
 #define SH_RPAR S(KC_9)
@@ -30,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     * |LShift|   Z  |   X  |   C  |   V  |   B  |------         -----|   N  |   M  |   ,  |   .  |   /  |RShift|
     * `-----------------------------------------/      \       /     \-----------------------------------------'
-    *                   | LAlt | LGUI | NAV  |  LCTRL  /       \ Enter   | SPACE| NUMB | ALTGR|
+    *                   | LAlt | LGUI | LEFT |  LCTRL  /       \ Enter   | SPACE| RGHT | ALTGR|
     *                   |      |      |      |        /         \        |      |      |      |
     *                   `----------------------------'           '------''--------------------'
     */
@@ -40,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,        KC_Y,    KC_U,       KC_I,    KC_O,    KC_P,   KC_LBRC,
         KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        KC_H,    KC_J,       KC_K,    KC_L, KC_SCLN,   KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,        KC_N,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,   KC_RSFT,
-                       KC_LALT, KC_LGUI, MO(NAV),   KC_LCTL,        KC_ENT,  KC_SPC, MO(NUMB),  KC_RALT
+                       KC_LALT, KC_LGUI, MO(LEFT),   KC_LCTL,        KC_ENT,  KC_SPC, MO(RGHT),  KC_RALT
     ),
     [COLEMAK] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,     KC_3,    KC_4,      KC_5,       KC_6,      KC_7,     KC_8,    KC_9,    KC_0, KC_MINUS,
@@ -48,19 +50,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,     KC_F,    KC_P,      KC_G,       KC_J,      KC_L,     KC_U,    KC_Y, KC_SCLN,  KC_LBRC,
         KC_BSPC, KC_A,    KC_R,     KC_S,    KC_T,      KC_D,       KC_H,      KC_N,     KC_E,    KC_I,    KC_O,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,     KC_C,    KC_V,      KC_B,       KC_K,      KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                       KC_LALT,   KC_LGUI,MO(NAV),   KC_LCTL,       KC_ENT,  KC_SPC, MO(NUMB), KC_RALT
+                       KC_LALT,   KC_LGUI,MO(LEFT),   KC_LCTL,       KC_ENT,  KC_SPC, MO(RGHT), KC_RALT
     ),
 
-    [NAV] = LAYOUT( // left up
-        KC_VOLD, KC_VOLU,  KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,      XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
+    [LEFT] = LAYOUT(// left up
+        KC_VOLD, KC_VOLU,  KC_MPRV,   KC_MPLY,  KC_MNXT, KC_PSCR,     XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
 
-        KC_MUTE, XXXXXXX,  XXXXXXX,  SH_LCBRK, SH_RCBRK,   KC_EQL,      KC_PGUP, C(KC_LEFT),   KC_UP, C(KC_RGHT), XXXXXXX, XXXXXXX,
-        _______,  KC_GRV,  XXXXXXX,   SH_LPAR,  SH_RPAR,  KC_RBRC,      KC_PGDN,    KC_LEFT, KC_DOWN,  KC_RGHT, S(KC_2), KC_BSLS,
-        _______, KC_NUBS, S(KC_NUBS), SH_LBRK,  SH_RBRK,MO(MOUSE),      XXXXXXX,    KC_HOME,  KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,
-                          _______,   _______,  _______, _______,      _______,  _______, MO(SETTINGS),  _______
+        KC_MUTE, KC_GRV,    XXXXXXX, SH_LCBRK,SH_RCBRK,  KC_EQL,      KC_PGUP, C(KC_LEFT),    KC_UP, C(KC_RGHT), XXXXXXX, XXXXXXX,
+        _______, KC_NUBS,S(KC_NUBS), SH_LPAR,  SH_RPAR, KC_RBRC,      KC_PGDN,    KC_LEFT,  KC_DOWN,  KC_RGHT, S(KC_2), KC_BSLS,
+        _______, XXXXXXX,   XXXXXXX, SH_RBRK,MO(MOUSE), XXXXXXX,      XXXXXXX,    KC_HOME,   KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,
+                          _______,   _______,  _______, _______,      _______,    _______, MO(SETTINGS),  _______
     ),
 
-    [NUMB] = LAYOUT( // Hold down right side
+    [RGHT] = LAYOUT( // Hold down right side
         _______, _______, _______, _______,      _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
 
         _______, XXXXXXX,    KC_7,    KC_8,         KC_9,  XXXXXXX,      XXXXXXX,    KC_F7,    KC_F8,    KC_F9,   KC_F10,  KC_DEL,
