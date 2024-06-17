@@ -21,8 +21,6 @@
 
 // https://github.com/qmk/qmk_firmware/blob/master/docs/feature_split_keyboard.md#handedness-by-eeprom
 // qmk flash -kb sighol56 -km default -bl uf2-split-{left,right}
-#define MASTER_LEFT
-
 #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN GP8
 #define SERIAL_USART_RX_PIN GP9
