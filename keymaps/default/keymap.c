@@ -173,7 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 memset(buffer, 0, sizeof(buffer));
                 generate_uuid(buffer, sizeof(buffer));
                 if (is_colemak()) {
-                    colemak_transform(buffer, sizeof(buffer));
+                    colemak_hex_transform(buffer, sizeof(buffer));
                 }
                 SEND_STRING(buffer);
             }
