@@ -4,6 +4,7 @@
 #include QMK_KEYBOARD_H
 #include "uuid.h"
 
+
 enum Layers {
     BASE,
     COLEMAK,
@@ -143,6 +144,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 
 
+bool is_colemak(void) {
+    return default_layer_state & (1 << BASE) || default_layer_state & (1 << BASE_MOD_TAP);
+}
+
+/*
+ * if BASE or BASE_MOD_TAP are enabled, that means that we have a colemak layer set on the computer. If so, we must type k to type an e.
+ */
+void colemak_hex_transform(char* buffer, int buffer_size) {
+    for (int i = 0; i < buffer_size; i++) {
+        if (buffer[i] == 0) {
+            return;
+        }
+        switch (buffer[i]) {
+            case 'e': buffer[i] = 'k'; break;
+            case 'd': buffer[i] = 'g'; break;
+            case 'f': buffer[i] = 'e'; break;
+        }
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static char buffer[37];
 
@@ -151,6 +172,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 memset(buffer, 0, sizeof(buffer));
                 generate_uuid(buffer, sizeof(buffer));
+                if (is_colemak()) {
+                    colemak_transform(buffer, sizeof(buffer));
+                }
                 SEND_STRING(buffer);
             }
             return false; // Skip all other keycodes
