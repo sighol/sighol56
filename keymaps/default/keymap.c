@@ -17,6 +17,7 @@ enum Layers {
 
 enum custom_keycodes {
     SH_UUID = SAFE_RANGE,
+    SH_TIME,
 };
 
 #define SH_LPAR S(KC_8)
@@ -97,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         QK_BOOT, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
 
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  DF(BASE_MOD_TAP), DF(BASE),   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX, DF(COLEMAK),   XXXXXXX,  XXXXXXX,  SH_UUID,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX, DF(COLEMAK),   XXXXXXX,  SH_TIME,  SH_UUID,  XXXXXXX,  XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
                              XXXXXXX,  XXXXXXX,  _______,     XXXXXXX,   XXXXXXX,  XXXXXXX,  _______,  XXXXXXX
     ),
@@ -153,6 +154,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(buffer);
             }
             return false; // Skip all other keycodes
+        case SH_TIME:
+            if (record->event.pressed) {
+                memset(buffer, 0, sizeof(buffer));
+                long unsigned int time = timer_read32();
+                sprintf(buffer, "%lu", time);
+                SEND_STRING(buffer);
+            }
+            return false;
     }
     return true; // Process all other keycodes normally
 }
