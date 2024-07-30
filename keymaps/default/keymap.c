@@ -160,12 +160,44 @@ void colemak_hex_transform(char* buffer, int buffer_size) {
             case 'e': buffer[i] = 'k'; break;
             case 'd': buffer[i] = 'g'; break;
             case 'f': buffer[i] = 'e'; break;
+            case 'n': buffer[i] = 'j'; break;
+            case 'i': buffer[i] = 'l'; break;
+            case 's': buffer[i] = 'd'; break;
+            case 'u': buffer[i] = 'i'; break;
+            case 'U': buffer[i] = 'I'; break;
+            case 'p': buffer[i] = 'r'; break;
+            case 't': buffer[i] = 'f'; break;
+            case '=': buffer[i] = '\\'; break;
         }
     }
 }
 
+void current_uptime_str(char* buffer, int buffer_size, long unsigned int millis) {
+    long unsigned int seconds = millis / 1000;
+    millis %= 1000;
+
+    long unsigned int minutes = seconds / 60;
+    seconds %= 60;
+
+    long unsigned int hours = minutes / 60;
+    minutes %= 60;
+    hours %= 24;
+
+    int i = snprintf(buffer, buffer_size, "Uptime is ");
+    if (hours > 0) {
+        i += snprintf(&buffer[i], buffer_size - i, "%ldh ", hours);
+    }
+
+    if (minutes > 0) {
+        i += snprintf(&buffer[i], buffer_size - i, "%ldm ", minutes);
+    }
+
+    snprintf(&buffer[i], buffer_size - i, "%lds %ldms", seconds, millis);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static char buffer[37];
+    static char current_time_buffer[50];
 
     switch (keycode) {
         case SH_UUID:
@@ -182,8 +214,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 memset(buffer, 0, sizeof(buffer));
                 long unsigned int time = timer_read32();
-                sprintf(buffer, "%lu", time);
-                SEND_STRING(buffer);
+                current_uptime_str(current_time_buffer, sizeof(current_time_buffer), time);
+                if (is_colemak()) {
+                    colemak_hex_transform(current_time_buffer, sizeof(current_time_buffer));
+                }
+                SEND_STRING(current_time_buffer);
             }
             return false;
     }
