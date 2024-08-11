@@ -1,0 +1,8 @@
+{
+  "name": "Sighol 56",
+  "description": "My own personal keyboard",
+  "author": "Sigurd Holsen",
+  "hardware": {
+    "microcontroller": "rp2040"
+  }
+}
