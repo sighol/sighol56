@@ -55,7 +55,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
     [BASE] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,      KC_5,        KC_6,    KC_7,     KC_8,   KC_9,    KC_0, KC_MINUS,
-
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,        KC_Y,    KC_U,     KC_I,   KC_O,    KC_P,  KC_LBRC,
         KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        KC_H,    KC_J,     KC_K,   KC_L, KC_SCLN,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,        KC_N,    KC_M,  KC_COMM, KC_DOT, KC_SLSH,  KC_RSFT,
@@ -63,15 +62,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [CLMK] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,     KC_3,    KC_4,      KC_5,       KC_6,   KC_7,     KC_8,    KC_9,    KC_0, KC_MINUS,
-
         KC_TAB,  KC_Q,    KC_W,     KC_F,    KC_P,      KC_G,       KC_J,   KC_L,     KC_U,    KC_Y, KC_SCLN,  KC_LBRC,
         KC_BSPC, KC_A,    KC_R,     KC_S,    KC_T,      KC_D,       KC_H,   KC_N,     KC_E,    KC_I,    KC_O,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,     KC_C,    KC_V,      KC_B,       KC_K,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
                        KC_LALT,   KC_LGUI,MO(LEFT),  KC_LCTL,     KC_ENT, KC_SPC, MO(RGHT), KC_RALT
     ),
     [MDTP] = LAYOUT(
-        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,      KC_5,        KC_6,     KC_7,     KC_8,   KC_9,    KC_0, KC_MINUS,
-
+        KC_ESC,  KC_1,    KC_2,     KC_3,     KC_4,    KC_5,        KC_6,     KC_7,     KC_8,   KC_9,    KC_0, KC_MINUS,
         KC_TAB,  KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,        KC_Y,     KC_U,     KC_I,   KC_O,    KC_P, KC_LBRC,
         KC_BSPC, MT_A,    MT_S,     MT_D,     MT_F,    KC_G,        KC_H,     MT_J,     MT_K,   MT_L, MT_SCLN, KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,     KC_C,     KC_V,    KC_B,        KC_N,     KC_M,  KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
@@ -79,7 +76,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [LEFT] = LAYOUT(
         KC_VOLD, KC_VOLU,    KC_MPRV,   KC_MPLY,  KC_MNXT,   KC_PSCR,     XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
-
         KC_MUTE,  KC_GRV,    XXXXXXX,  SH_LCBRK, SH_RCBRK,    KC_EQL,     KC_PGUP, C(KC_LEFT),        KC_UP, C(KC_RGHT), XXXXXXX, XXXXXXX,
         _______, KC_NUBS, S(KC_NUBS),   SH_LPAR,  SH_RPAR,   KC_RBRC,     KC_PGDN,    KC_LEFT,      KC_DOWN,    KC_RGHT, S(KC_2), KC_BSLS,
         _______, XXXXXXX,    XXXXXXX,   SH_LBRK,  SH_RBRK, MO(MOUSE),     XXXXXXX,    KC_HOME,       KC_END,    XXXXXXX, XXXXXXX, XXXXXXX,
@@ -87,23 +83,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [RGHT] = LAYOUT(
         _______, _______, _______, _______,      _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
-
         _______, XXXXXXX,    KC_7,    KC_8,         KC_9,  XXXXXXX,      XXXXXXX,    KC_F7,    KC_F8,    KC_F9,   KC_F10,  KC_DEL,
         _______,    KC_0,    KC_4,    KC_5,         KC_6,     KC_0,      XXXXXXX,    KC_F4,    KC_F5,    KC_F6,   KC_F11, KC_CAPS,
         _______, XXXXXXX,    KC_1,    KC_2,         KC_3,  XXXXXXX,      XXXXXXX,    KC_F1,    KC_F2,    KC_F3,   KC_F12, XXXXXXX,
                           _______, _______, MO(SETTINGS),  _______,      _______,  _______,  _______,  _______
     ),
     [SETTINGS] = LAYOUT(
-        QK_BOOT, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
-
-        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  DF(MDTP), DF(BASE),     XXXXXXX,  UG_SATU,  UG_HUEU, UG_VALU,  XXXXXXX, XXXXXXX,
+        QK_BOOT, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, DF(MDTP), DF(BASE),      XXXXXXX,  UG_SATU,  UG_HUEU, UG_VALU,  XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(CLMK),     XXXXXXX,  SH_TIME,  SH_UUID, XXXXXXX,  XXXXXXX, XXXXXXX,
-        _______, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, _______,
-                             XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,      XXXXXXX,  XXXXXXX,  _______, XXXXXXX
+        _______, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, _______,
+                             XXXXXXX,  XXXXXXX,  _______,   XXXXXXX,     XXXXXXX,  XXXXXXX,  _______, XXXXXXX
     ),
     [MOUSE] = LAYOUT(
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
-
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_U,  XXXXXXX,  KC_MS_U,  XXXXXXX,  XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_D,  KC_MS_L,  KC_MS_D,  KC_MS_R,  XXXXXXX, XXXXXXX,
         _______, XXXXXXX,    KC_ACL0,  KC_ACL1,  KC_ACL2,  _______,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
@@ -111,7 +104,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [TEMP] = LAYOUT( // NOT IN USE
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
-
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
@@ -141,13 +133,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 */
 
-
-bool is_colemak(void) {
+// True if the operating system is translating to colemak. False if the keyboard
+// is translating to colemak
+bool is_os_colemak(void) {
     return default_layer_state & (1 << BASE) || default_layer_state & (1 << MDTP);
 }
 
 /*
- * if BASE or MDTP are enabled, that means that we have a colemak layer set on the computer. If so, we must type k to type an e.
+ * If the OS is in colemak mode, we need to type the qwerty key codes that
+ * correspond to the letter.
  */
 void colemak_hex_transform(char* buffer, int buffer_size) {
     for (int i = 0; i < buffer_size; i++) {
@@ -202,7 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 memset(buffer, 0, sizeof(buffer));
                 generate_uuid(buffer, sizeof(buffer));
-                if (is_colemak()) {
+                if (is_os_colemak()) {
                     colemak_hex_transform(buffer, sizeof(buffer));
                 }
                 SEND_STRING(buffer);
@@ -213,14 +207,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 memset(buffer, 0, sizeof(buffer));
                 long unsigned int time = timer_read32();
                 current_uptime_str(current_time_buffer, sizeof(current_time_buffer), time);
-                if (is_colemak()) {
+                if (is_os_colemak()) {
                     colemak_hex_transform(current_time_buffer, sizeof(current_time_buffer));
                 }
                 SEND_STRING(current_time_buffer);
             }
             return false;
     }
-    return true; // Process all other keycodes normally
+    return true;
 }
 
 
