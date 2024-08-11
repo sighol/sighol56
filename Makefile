@@ -5,8 +5,7 @@ build:
 	qmk compile -km default
 
 flash: build
-	bash -c '[[ -f $(BUILD) ]]'
-	bash -c '[[ -d $(TARGET) ]]'
+	bash -c 'while [[ ! -f $(TARGET)/INDEX.HTM ]]; do printf "Waiting...\n"; sleep 1; done; printf "Mounted...\n"; sleep 2'
 	cp $(BUILD) $(TARGET)
 
 .PHONY: build flash
