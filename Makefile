@@ -1,5 +1,5 @@
 BUILD = ../../.build/sighol56_default.uf2
-TARGET = /run/media/sighol/RPI-RP2
+TARGET = /mnt/RPI-RP2
 
 build:
 	qmk compile -km default

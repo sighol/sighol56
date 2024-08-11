@@ -1,0 +1,1 @@
+KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ACTION=="add", ENV{ID_FS_LABEL}=="RPI-RP2", RUN+="/usr/bin/systemd-mount --no-block --owner sighol /dev/%k /mnt/RPI-RP2"
