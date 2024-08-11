@@ -7,9 +7,7 @@ static uint32_t seed = 0;
 
 // Simple pseudo-random number generator
 static uint32_t rand32(void) {
-    if (seed == 0) {
-        seed = timer_read32();
-    }
+    seed &= timer_read32(); // Add some true randomness
     seed = seed * 1664525 + 1013904223; // Linear Congruential Generator
     return seed;
 }
