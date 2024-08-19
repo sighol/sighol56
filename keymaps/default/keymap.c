@@ -97,11 +97,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              XXXXXXX,  XXXXXXX,  _______,   XXXXXXX,     XXXXXXX,  XXXXXXX,  _______, XXXXXXX
     ),
     [MOUSE] = LAYOUT(
-        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_U,  XXXXXXX,  KC_MS_U,  XXXXXXX,  XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     KC_WH_D,  KC_MS_L,  KC_MS_D,  KC_MS_R,  XXXXXXX, XXXXXXX,
-        _______, XXXXXXX,    KC_ACL0,  KC_ACL1,  KC_ACL2,  _______,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
-                             _______,  _______,  _______,  XXXXXXX,     KC_BTN1,  KC_BTN2,  _______,  XXXXXXX
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_WH_U,  XXXXXXX,  KC_MS_U,  XXXXXXX,  XXXXXXX, XXXXXXX,
+        KC_VOLD, KC_VOLU, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX,     KC_WH_D,  KC_MS_L,  KC_MS_D,  KC_MS_R,  XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, _______,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+                          _______, _______, _______, XXXXXXX,     KC_BTN1,  KC_BTN2,  _______,  XXXXXXX
     ),
     [TEMP] = LAYOUT( // NOT IN USE
         _______, _______,    _______,  _______,  _______,  _______,      _______,  _______,  _______,  _______,  _______, _______,
