@@ -196,10 +196,10 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
             rgblight_setrgb_at(0, 25, 0, 0);
             break;
         case CLMK:
-            rgblight_setrgb_at(0, 25, 25, 0);
+            rgblight_setrgb_at(0, 0, 25, 0);
             break;
         case MDTP:
-            rgblight_setrgb_at(25, 0, 25, 0);
+            rgblight_setrgb_at(25, 0, 0, 0);
             break;
         default:
             rgblight_setrgb_at(0, 0, 0, 0);
