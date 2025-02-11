@@ -1,0 +1,5 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"CH1, CH10, CH11, CH12, CH13, CH14, CH15, CH16, CH17, CH18, CH19, CH2, CH20, CH21, CH22, CH23, CH24, CH25, CH28, CH29, CH3, CH30, CH4, CH5, CH6, CH7, CH8, CH9",Kailh_socket_PG1350_optional_reversible_clean,28,KS33_SW_HS,
+"D1, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D2, D20, D21, D22, D23, D24, D25, D28, D29, D3, D30, D4, D5, D6, D7, D8, D9",D_DO-35_SOD27_P7.62mm_Horizontal,28,D_Small,
+J1,TRRS-PJ-320A,1,AudioPlug4,
+RZ1,RP2040-Zero-reversible,1,RP2040-Zero,
