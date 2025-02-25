@@ -33,3 +33,4 @@
 
 #define PERMISSIVE_HOLD_PER_KEY
 #define CHORDAL_HOLD
+#define QUICK_TAP_TERM 0
