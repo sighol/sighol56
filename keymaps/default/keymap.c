@@ -8,8 +8,8 @@
 
 enum Layers {
     BASE,
+    NO_MOD_TAP,
     CLMK,
-    MDTP,
     LEFT,
     RGHT,
     SETTINGS,
@@ -30,14 +30,13 @@ enum custom_keycodes {
 #define SH_RCBRK ALGR(KC_0)
 #define SH_SLSH S(KC_7)
 
-#define MT_A MT(MOD_LGUI, KC_A)
-#define MT_S MT(MOD_LALT, KC_S)
+
 #define MT_D MT(MOD_LSFT, KC_D)
-#define MT_F MT(MOD_LCTL, KC_F)
-#define MT_J MT(MOD_LCTL, KC_J)
+#define MT_F LT(LEFT, KC_F)
+
+#define MT_J LT(RGHT, KC_J)
 #define MT_K MT(MOD_LSFT, KC_K)
-#define MT_L MT(MOD_LALT, KC_L)
-#define MT_SCLN MT(MOD_LGUI, KC_SCLN)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -56,7 +55,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                   `----------------------------'           '------''--------------------'
     */
     [BASE] = LAYOUT(
-        KC_ESC,  KC_1,    KC_2,     KC_3,    KC_4,     KC_5,        KC_6,   KC_7,     KC_8,    KC_9,    KC_0, KC_MINUS,
+        KC_ESC,  KC_1,    KC_2,     KC_3,     KC_4,    KC_5,        KC_6,     KC_7,     KC_8,    KC_9,    KC_0, KC_MINUS,
+        KC_TAB,  KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,        KC_Y,     KC_U,     KC_I,    KC_O,    KC_P, KC_LBRC,
+        KC_BSPC, KC_A,    KC_S,     MT_D,     MT_F,    KC_G,        KC_H,     MT_J,     MT_K,    KC_L, KC_SCLN, KC_QUOT,
+        KC_LSFT, KC_Z,    KC_X,     KC_C,     KC_V,    KC_B,        KC_N,     KC_M,  KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
+                       KC_LALT,  KC_LGUI, MO(LEFT), KC_LCTL,      KC_ENT,   KC_SPC, MO(RGHT), KC_RALT
+    ),
+    [NO_MOD_TAP] = LAYOUT(
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,     KC_5,         KC_6,    KC_7,     KC_8,   KC_9,    KC_0, KC_MINUS,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,        KC_Y,    KC_U,     KC_I,   KC_O,    KC_P,  KC_LBRC,
         KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        KC_H,    KC_J,     KC_K,   KC_L, KC_SCLN,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,        KC_N,    KC_M,  KC_COMM, KC_DOT, KC_SLSH,  KC_RSFT,
@@ -68,13 +74,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_BSPC, KC_A,    KC_R,     KC_S,    KC_T,      KC_D,       KC_H,   KC_N,     KC_E,    KC_I,    KC_O,  KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,     KC_C,    KC_V,      KC_B,       KC_K,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
                        KC_LALT,   KC_LGUI,MO(LEFT),  KC_LCTL,     KC_ENT, KC_SPC, MO(RGHT), KC_RALT
-    ),
-    [MDTP] = LAYOUT(
-        KC_ESC,  KC_1,    KC_2,     KC_3,     KC_4,    KC_5,        KC_6,     KC_7,     KC_8,   KC_9,    KC_0, KC_MINUS,
-        KC_TAB,  KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,        KC_Y,     KC_U,     KC_I,   KC_O,    KC_P, KC_LBRC,
-        KC_BSPC, MT_A,    MT_S,     MT_D,     MT_F,    KC_G,        KC_H,     MT_J,     MT_K,   MT_L, MT_SCLN, KC_QUOT,
-        KC_LSFT, KC_Z,    KC_X,     KC_C,     KC_V,    KC_B,        KC_N,     KC_M,  KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-              KC_LALT, KC_LGUI, MO(LEFT),  KC_LCTL,  KC_ENT,      KC_SPC, MO(RGHT),  KC_RALT
     ),
     [LEFT] = LAYOUT(
         KC_VOLD,  KC_VOLU,    KC_MPRV,   KC_MPLY,  KC_MNXT,   KC_PSCR,     XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
@@ -92,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SETTINGS] = LAYOUT(
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(MDTP), DF(BASE),     XXXXXXX, UG_SATU, UG_HUEU, UG_VALU, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(NO_MOD_TAP), DF(BASE),     XXXXXXX, UG_SATU, UG_HUEU, UG_VALU, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, DF(CLMK),     XXXXXXX, SH_TIME, SH_UUID, XXXXXXX, XXXXXXX, XXXXXXX,
         _______, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                           XXXXXXX, XXXXXXX,  _______,  XXXXXXX,     XXXXXXX, XXXXXXX, _______, XXXXXXX
@@ -138,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // True if the operating system is translating to colemak. False if the keyboard
 // is translating to colemak
 bool is_os_colemak(void) {
-    return default_layer_state & (1 << BASE) || default_layer_state & (1 << MDTP);
+    return default_layer_state & (1 << BASE) || default_layer_state & (1 << NO_MOD_TAP);
 }
 
 /*
@@ -198,7 +197,7 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
         case CLMK:
             rgblight_setrgb_at(0, 0, 25, 0);
             break;
-        case MDTP:
+        case NO_MOD_TAP:
             rgblight_setrgb_at(25, 0, 0, 0);
             break;
         default:
