@@ -12,6 +12,7 @@ enum Layers {
     CLMK,
     LEFT,
     RGHT,
+    SYMBOLS,
     SETTINGS,
     MOUSE,
     TEMP,
@@ -31,10 +32,25 @@ enum custom_keycodes {
 #define SH_SLSH S(KC_7)
 
 
-#define MT_D MT(MOD_LSFT, KC_D)
+// #define MT_D MT(MOD_LSFT, KC_D)
 
-#define MT_J LT(RGHT, KC_J)
-#define MT_K MT(MOD_LSFT, KC_K)
+// #define MT_J LT(RGHT, KC_J)
+// #define MT_K MT(MOD_LSFT, KC_K)
+
+#define MT_D KC_D
+#define MT_J KC_J
+#define MT_K KC_K
+
+const uint16_t PROGMEM number_combo[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM symbol_combo[] = {KC_N, KC_M, COMBO_END};
+const uint16_t PROGMEM number_combo2[] = {KC_J, KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM symbol_combo2[] = {KC_J, KC_I, KC_L, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(number_combo, MO(RGHT)),
+    COMBO(number_combo2, MO(RGHT)),
+    COMBO(symbol_combo, MO(SYMBOLS)),
+    COMBO(symbol_combo2, MO(SYMBOLS)),
+};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -87,6 +103,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    KC_0,    KC_4,    KC_5,         KC_6,     KC_0,      XXXXXXX,    KC_F4,    KC_F5,    KC_F6,   KC_F11, KC_CAPS,
         _______, XXXXXXX,    KC_1,    KC_2,         KC_3,   KC_DOT,      XXXXXXX,    KC_F1,    KC_F2,    KC_F3,   KC_F12, XXXXXXX,
                           _______, _______, MO(SETTINGS),  _______,      _______,  _______,  _______,  _______
+    ),
+    [SYMBOLS] = LAYOUT(
+        _______, _______, _______, _______, _______,  _______,      _______,  _______,  _______,  _______, _______, _______,
+        _______, XXXXXXX, S(KC_7), S(KC_8), S(KC_9),  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, S(KC_4), S(KC_5), S(KC_6),  S(KC_0),      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, S(KC_1), S(KC_2), S(KC_3),  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
+                          _______, _______, _______,  _______,      _______,  _______,  _______,  _______
     ),
     [SETTINGS] = LAYOUT(
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
