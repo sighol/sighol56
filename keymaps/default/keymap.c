@@ -113,14 +113,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______,  _______,      _______, _______, _______, _______, _______, _______,
         _______,RALT(KC_4),  KC_7,    KC_8,     KC_9,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         _______,RALT(KC_2),  KC_4,    KC_5,     KC_6,     KC_0,     XXXXXXX, XXXXXXX, MO(QUICK_SYMBOLS), XXXXXXX, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX,    KC_1,    KC_2,     KC_3,   KC_DOT,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX,    KC_1,    KC_2,     KC_3,   KC_DOT,     XXXXXXX, XXXXXXX, _______, _______, _______, XXXXXXX,
                            _______, _______, _______,  _______,     _______, _______, _______, _______
     ),
     [QUICK_SYMBOLS] = LAYOUT(
         _______, _______, _______, _______, _______,  _______,      _______, _______, _______, _______, _______, _______,
         _______, XXXXXXX, S(KC_7), S(KC_8), S(KC_9),  XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         _______, XXXXXXX, S(KC_4), S(KC_5), S(KC_6),  S(KC_0),      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, S(KC_1), S(KC_2), S(KC_3),  XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, S(KC_1), S(KC_2), S(KC_3),  XXXXXXX,      XXXXXXX, XXXXXXX, _______, _______, _______, XXXXXXX,
                           _______, _______, _______,  _______,      _______, _______, _______, _______
     ),
 };
