@@ -22,6 +22,7 @@ enum Layers {
 enum custom_keycodes {
     SH_UUID = SAFE_RANGE,
     SH_TIME,
+    SH_REVIEWABLE,
 };
 
 #define SH_LPAR S(KC_8)
@@ -98,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SETTINGS] = LAYOUT(
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(NO_MOD_TAP), DF(BASE),     XXXXXXX, UG_SATU, UG_HUEU, UG_VALU, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, DF(CLMK),     XXXXXXX, SH_TIME, SH_UUID, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, DF(CLMK),     XXXXXXX, SH_TIME, SH_UUID, SH_REVIEWABLE, XXXXXXX, XXXXXXX,
         _______, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                           XXXXXXX, XXXXXXX,  _______,  XXXXXXX,     XXXXXXX, XXXXXXX, _______, XXXXXXX
     ),
@@ -144,36 +145,104 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______,  _______,  _______,                                _______,                                _______,  _______,  _______,  _______,  _______,  _______)
 };
 
-
 */
 
-// True if the operating system is translating to colemak. False if the keyboard
-// is translating to colemak
-bool is_os_colemak(void) {
-    return default_layer_state & (1 << BASE) || default_layer_state & (1 << NO_MOD_TAP);
+
+char* send_string_rewrite_symbol(char c) {
+    static char str_plus[] = "-";
+    static char str_colon[] = SS_LSFT(".");
+    static char str_dash[] = "/";
+    static char str_at[] = SS_RALT("2");
+    static char str_equals[] = "\\";
+
+    switch (c) {
+        case '+': return str_plus;
+        case ':': return str_colon;
+        case '-': return str_dash;
+        case '@': return str_at;
+        case '=': return str_equals;
+        default: return 0;
+    }
 }
 
-/*
- * If the OS is in colemak mode, we need to type the qwerty key codes that
- * correspond to the letter.
+void append(char* buffer, int buffer_size, int* index, char* str) {
+    int i = 0;
+    while (*str != '\0' && *index < buffer_size) {
+        buffer[(*index)++] = *str++;
+        i++;
+    }
+}
+
+/**
+ * Since I am using a Norwegian keyboard, most often with a Colemak layout, we must rewrite the
+ * characters before they are sent to send_string. If the colemak layer is used, we assume the OS is
+ * running with a Norwegian layout. Then only the symbols need to be rewritten.
+ *
+ * If the colemak layer is not used, then we assume the OS is running with Norwegian(Colemak), and we
+ * must therefore rewrite most of the keys as well.
+ *
+ * The input buffer must be large enough to hold extra characters as some symbols will be encoded
+ * with multiple bytes.
  */
-void colemak_hex_transform(char* buffer, int buffer_size) {
+void send_string_rewrite(
+    char* buffer,
+    int buffer_size
+) {
+    char read_buffer[500] = { 0 };
+    if (buffer_size > sizeof(read_buffer)) {
+        return;
+    }
+
+    memcpy(read_buffer, buffer, buffer_size);
+    memset(buffer, 0, buffer_size);
+
+    int j = 0;
     for (int i = 0; i < buffer_size; i++) {
-        if (buffer[i] == 0) {
-            return;
+        char c = read_buffer[i];
+        if (c == 0) {
+            break;
         }
-        switch (buffer[i]) {
-            case 'e': buffer[i] = 'k'; break;
-            case 'd': buffer[i] = 'g'; break;
-            case 'f': buffer[i] = 'e'; break;
-            case 'n': buffer[i] = 'j'; break;
-            case 'i': buffer[i] = 'l'; break;
-            case 's': buffer[i] = 'd'; break;
-            case 'u': buffer[i] = 'i'; break;
-            case 'U': buffer[i] = 'I'; break;
-            case 'p': buffer[i] = 'r'; break;
-            case 't': buffer[i] = 'f'; break;
-            case '=': buffer[i] = '\\'; break;
+
+        char* symbol = send_string_rewrite_symbol(c);
+        if (symbol != 0) {
+            append(buffer, buffer_size, &j, symbol);
+        } else if (default_layer_state & (1 << CLMK)) {
+            buffer[j++] = c;
+        } else {
+            if (c == 'o') {
+                buffer[j++] = ';';
+            } else if (c == 'O') {
+                buffer[j++] = ':';
+            } else {
+                bool is_upper = c >= 'A' && c <= 'Z';
+                char lower = c;
+                if (is_upper) lower += 32;
+                char converted = 0;
+
+                switch (lower) {
+                    case 'f': converted = 'e'; break;
+                    case 'p': converted = 'r'; break;
+                    case 'g': converted = 't'; break;
+                    case 'j': converted = 'y'; break;
+                    case 'l': converted = 'u'; break;
+                    case 'u': converted = 'i'; break;
+                    case 'y': converted = 'o'; break;
+
+                    case 'r': converted = 's'; break;
+                    case 's': converted = 'd'; break;
+                    case 't': converted = 'f'; break;
+                    case 'd': converted = 'g'; break;
+                    case 'n': converted = 'j'; break;
+                    case 'e': converted = 'k'; break;
+                    case 'i': converted = 'l'; break;
+
+                    case 'k': converted = 'n'; break;
+                    default: converted = lower; break;
+                }
+
+                if (is_upper) converted -= 32;
+                buffer[j++] = converted;
+            }
         }
     }
 }
@@ -189,7 +258,7 @@ void current_uptime_str(char* buffer, int buffer_size, long unsigned int millis)
     minutes %= 60;
     hours %= 24;
 
-    int i = snprintf(buffer, buffer_size, "Uptime is ");
+    int i = 0;
     if (hours > 0) {
         i += snprintf(&buffer[i], buffer_size - i, "%ldh ", hours);
     }
@@ -231,37 +300,43 @@ void keyboard_post_init_user(void) {
     default_layer_state_set_user(default_layer_state);
 }
 
+void send_uuid(void) {
+    char buffer[150] = { 0 };
+    generate_uuid(buffer, sizeof(buffer));
+    send_string_rewrite(buffer, sizeof(buffer));
+    SEND_STRING(buffer);
+}
+
+void send_uptime(void) {
+    char buffer[150] = "Uptime: ";
+    int len = strlen(buffer);
+    long unsigned int millis = timer_read32();
+    current_uptime_str(buffer + len, sizeof(buffer) - len, millis);
+    send_string_rewrite(buffer, sizeof(buffer));
+    SEND_STRING(buffer);
+}
+
+void send_reviewable(void) {
+    char buffer[250] =
+        ":unicorn:"
+        " -waiting-for-risk-review"
+        " +waiting-for-team"
+        " +risk-review-ongoing"
+        " +assignee:@sighol";
+    send_string_rewrite(buffer, sizeof(buffer));
+    SEND_STRING(buffer);
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    static char buffer[37];
-    static char current_time_buffer[50];
-
-    switch (keycode) {
-        case SH_UUID:
-            if (record->event.pressed) {
-                memset(buffer, 0, sizeof(buffer));
-                generate_uuid(buffer, sizeof(buffer));
-                if (is_os_colemak()) {
-                    colemak_hex_transform(buffer, sizeof(buffer));
-                }
-                SEND_STRING(buffer);
-            }
-            return false; // Skip all other keycodes
-        case SH_TIME:
-            if (record->event.pressed) {
-                memset(buffer, 0, sizeof(buffer));
-                long unsigned int time = timer_read32();
-                current_uptime_str(current_time_buffer, sizeof(current_time_buffer), time);
-                if (is_os_colemak()) {
-                    colemak_hex_transform(current_time_buffer, sizeof(current_time_buffer));
-                }
-                SEND_STRING(current_time_buffer);
-            }
-            return false;
+    if (record->event.pressed) {
+        switch (keycode) {
+            case SH_UUID: send_uuid(); return false;
+            case SH_TIME: send_uptime(); return false;
+            case SH_REVIEWABLE: send_reviewable(); return false;
+        }
     }
     return true;
 }
-
 
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {

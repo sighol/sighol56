@@ -28,7 +28,7 @@ void generate_uuid(char *buffer, size_t buffer_size) {
 
     // Format the UUID string
     snprintf(buffer, buffer_size,
-             "%08lx/%04lx/%04lx/%04lx/%04lx%08lx",
+             "%08lx-%04lx-%04lx-%04lx-%04lx%08lx",
              rand1,
              ((rand2 >> 16) & 0xFFFF),
              (rand2 & 0xFFFF),

@@ -2,7 +2,7 @@ BUILD = ../../.build/sighol56_default.uf2
 TARGET = /mnt/RPI-RP2
 
 build:
-	rm $(BUILD)
+	rm -f $(BUILD)
 	qmk compile -km default -kb sighol56
 	@[[ -f "$(BUILD)" ]] || bash -c "echo build did not produce build target; exit 1"
 
