@@ -4,3 +4,4 @@ CAPS_WORD_ENABLE = yes
 CONSOLE_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 COMBO_ENABLE = no
+DEBOUNCE_TYPE = asym_eager_defer_pk

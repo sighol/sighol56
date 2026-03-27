@@ -34,3 +34,6 @@
 #define PERMISSIVE_HOLD_PER_KEY
 #define CHORDAL_HOLD
 #define QUICK_TAP_TERM 0
+
+// The i key is often double-writing.
+#define DEBOUNCE 10
